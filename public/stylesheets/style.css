@@ -483,5 +483,10 @@ body {
 
 .spacer {
 
-    margin-bottom: 70px;
+    margin-bottom: 90px;
+}
+
+.table>tbody>tr>td {
+
+    vertical-align: middle;
 }

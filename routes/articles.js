@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    res.render('articles', {title: 'All articles'});
 });
 
 router.get('/show/:id', function(req, res, next){

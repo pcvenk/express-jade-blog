@@ -474,3 +474,14 @@ body {
     -o-background-size: cover !important;
     background-size: cover !important;
 }
+
+.navbar {
+
+    background-color: black !important;
+
+}
+
+.spacer {
+
+    margin-bottom: 70px;
+}

@@ -10,5 +10,9 @@ router.get('/show/:id', function(req, res, next){
    res.render('article');
 });
 
+router.get('/category/:category_id', function(req, res, next){
+   res.render('articles');
+});
+
 module.exports = router;
 

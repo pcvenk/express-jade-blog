@@ -17,4 +17,12 @@ router.get('/categories/add', function(req, res, next){
    res.render('add-category', {title: 'Add Category'})
 });
 
+router.get('/articles/edit/:id', function(req, res, next){
+    res.render('edit-article', {title: 'Edit Article'})
+});
+
+router.get('/categories/edit/:id', function(req, res, next){
+    res.render('edit-category', {title: 'Edit Category'})
+});
+
 module.exports = router;

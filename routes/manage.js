@@ -11,7 +11,7 @@ router.get('/categories', function (req, res, next) {
 
     Category.getCategories(function(err, docs){
         if(err){
-            console.log(err)
+            console.log(err);
         }else{
             res.render('manage-categories', {
                 title: 'Manage Categories',
@@ -34,7 +34,17 @@ router.get('/articles/edit/:id', function(req, res, next){
 });
 
 router.get('/categories/edit/:id', function(req, res, next){
-    res.render('edit-category', {title: 'Edit Category'})
+
+    Category.getCategoryById([req.params.id], function(err, doc){
+        if(err){
+            res.render(err);
+        }else{
+            res.render('edit-category', {
+                title: 'Edit Category',
+                category: doc
+            });
+        }
+    });
 });
 
 module.exports = router;

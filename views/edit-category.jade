@@ -6,13 +6,13 @@ block content
         .row
             .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
                 h1= title
-                form(method='post', action='/categories/edit/1')
+                form(method='post', action='/categories/edit/#{category._id}')
                     .form-group
                         label Title:
-                        input.form-control(name='title', type='text')
+                        input.form-control(name='title', type='text', value='#{category.title}')
                     .form-group
                         label Description
-                        textarea.form-control(name='description', id='body')
+                        textarea.form-control(name='description', id='body') #{category.description}
                             if(description)
                                 =description
                     input.btn.btn-primary.save-button(name='submit', type='submit', value='Save')

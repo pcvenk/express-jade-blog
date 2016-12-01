@@ -28,3 +28,8 @@ module.exports.addCategory = function(category, callback){
 module.exports.getCategoryById = function(id, callback){
   Category.findById(id, callback);
 };
+
+// Update Category
+module.exports.updateCategory = function(query, update, options, callback){
+    Category.findOneAndUpdate(query, update, options, callback);
+};

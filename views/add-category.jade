@@ -11,7 +11,6 @@ block content
                         label Title:
                         input.form-control(name='title', type='text')
                         //errors refers to the categories/add route in the res.render
-                    ul.errors
                     if errors
                         each error, i in errors
                             div.alert.alert-info #{error.msg)

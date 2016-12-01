@@ -15,8 +15,9 @@ block content
                     tr
                         th Category Title
                         th
-                            tr
-                                td TITLE
-                                td
-                                    a(class='btn btn-xs btn-default' href='/manage/categories/edit/1') Edit
+                            each category, i in categories
+                                tr
+                                    td #{category.title}
+                                    td
+                                        a(class='btn btn-xs btn-default pull-right' href='/manage/categories/edit/#{category._id}') Edit
                 != messages()

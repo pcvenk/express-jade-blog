@@ -495,3 +495,9 @@ body {
 
     margin-right: 30px;
 }
+
+.pull-right {
+
+    margin-right: 75px !important;
+
+}

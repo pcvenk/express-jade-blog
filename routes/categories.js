@@ -18,5 +18,21 @@ router.get('/', function (req, res, next) {
 
 });
 
+router.post('/add', function(req, res){
+    //enabling express validator
+    req.checkBody('title', 'Title is required').notEmpty();
+    //referencing errors into a variable
+    var valErrors = req.validationErrors();
+
+    if(valErrors){
+        res.render('add-category', {
+            errors: valErrors,
+            title: 'Add Category'
+        });
+    } else {
+       res.send('Passed');
+    }
+});
+
 module.exports = router;
 

@@ -17,3 +17,4 @@ block content
                                 =description
                     input.btn.btn-primary.save-button(name='submit', type='submit', value='Save')
                     a(class='btn btn-default' href='/manage/categories') Back
+                    a(class='btn btn-danger pull-right delete-btn', data-category-id=category._id.toString(), data-csrf=locals._csrf) Delete

@@ -35,13 +35,13 @@ router.get('/articles/edit/:id', function(req, res, next){
 
 router.get('/categories/edit/:id', function(req, res, next){
 
-    Category.getCategoryById([req.params.id], function(err, doc){
+    Category.getCategoryById([req.params.id], function(err, category){
         if(err){
             res.render(err);
         }else{
             res.render('edit-category', {
                 title: 'Edit Category',
-                category: doc
+                category: category
             });
         }
     });

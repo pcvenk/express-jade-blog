@@ -74,5 +74,16 @@ router.post('/edit/:id', function(req, res){
     }
 });
 
+router.delete('/delete/:id', function(req, res){
+    var query = {_id: [req.params.id]};
+    Category.remove(query, function(err){
+        if(err){
+            res.send(err);
+        } else {
+            res.status(204).send();
+        }
+    });
+});
+
 module.exports = router;
 

@@ -8,6 +8,7 @@ var session = require('express-session');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 
+
 var mongoose = require('mongoose');
 
 //open connection
@@ -24,6 +25,8 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+//setting up a local variable
+app.locals.moment = require('moment');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

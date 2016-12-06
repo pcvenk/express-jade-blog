@@ -20,5 +20,5 @@ block content
                                     h2.post-title #{article.title}
                                     h3.post-subtitle #{article.subtitle}
                                 p.post-meta #{article.author}
-                                    |  on September 24, 2014
+                                    |  on #{moment(article.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
                             hr

@@ -23,3 +23,23 @@ var articleSchema = new mongoose.Schema({
 });
 
 var Article = module.exports = mongoose.model('Article', articleSchema);
+
+//getArticles
+module.exports.getArticles = function(callback, limit){
+    Article.find(callback).limit(limit);
+};
+
+//addArticles
+module.exports.addArticle = function(article, callback){
+    Article.create(article, callback);
+};
+
+//getArticle
+module.exports.getArticleById = function(id, callback){
+    Article.findById(id, callback);
+};
+
+// Update Article
+module.exports.updateArticle = function(query, update, options, callback){
+    Article.findOneAndUpdate(query, update, options, callback);
+};

@@ -69,6 +69,47 @@ router.post('/add', function(req, res){
     }
 });
 
+router.post('/edit/:id', function(req, res, next){
+    // Validation Rules
+    req.checkBody('title','Title field is required').notEmpty();
+    req.checkBody('author','Author field is required').notEmpty();
+    req.checkBody('category','Category field is required').notEmpty();
+    // Check Errors
+    var errors = req.validationErrors();
+
+    if(errors){
+        res.render('edit_article',{
+            "errors": errors,
+            "title": req.body.title,
+            "subtitle": req.body.subtitle,
+            "body": req.body.body,
+            "author": req.body.author,
+            "category": req.body.category
+        });
+    } else {
+        var article = new Article();
+        var query = {_id:[req.params.id]};
+        var update = {
+            title:req.body.title,
+            subtitle:req.body.subtitle,
+            category:req.body.category,
+            author:req.body.author
+        };
+
+        Article.updateArticle(query, update, {}, function(err, article){
+            if(err){
+                res.send('Error: '+err);
+            } else {
+                req.flash('success','Article Updated');
+                res.location('/manage/articles');
+                res.redirect('/manage/articles');
+            }
+        });
+    }
+});
+
+
+
 router.get('/category/:category_id', function(req, res, next){
    res.render('articles');
 });

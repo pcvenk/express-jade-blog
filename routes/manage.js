@@ -52,26 +52,20 @@ router.get('/categories/add', function(req, res, next){
 
 router.get('/articles/edit/:id', function(req, res, next){
 
-    Category.getCategories(function(err, docs){
-       if(err){
-           res.send(err);
-       }else{
-           res.render('edit-article', {
-               title: 'Edit Article',
-               categories: docs
-           });
-       }
-    });
-
-    Article.getArticleById([req.params.id], function(err, doc){
+    Article.getArticleById([req.params.id], function(err, article){
 
         if(err){
             res.send(err);
         }else{
-            res.render('edit-article', {
-                title: 'Edit Article',
-                article: doc
+            Category.getCategories(function(err, categories){
+
+                res.render('edit-article', {
+                    title: 'Edit Article',
+                    article: article,
+                    categories: categories
+                });
             });
+
         }
     });
 });
@@ -79,6 +73,7 @@ router.get('/articles/edit/:id', function(req, res, next){
 router.get('/categories/edit/:id', function(req, res, next){
 
     Category.getCategoryById([req.params.id], function(err, category){
+
         if(err){
             res.send(err);
         }else{

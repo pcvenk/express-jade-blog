@@ -6,25 +6,24 @@ block content
         .row
             .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
                 h1= title
-                form(method='post', action='/articles/edit/1')
+                form(method='post', action='/articles/edit/#{article._id}')
                     .form-group
                         label Title:
-                        input.form-control(name='title', type='text')
+                        input.form-control(name='title', type='text', value='#{article.title}')
                     .form-group
                         label Subtitle:
-                        input.form-control(name='subtitle', type='text')
+                        input.form-control(name='subtitle', type='text', value='#{article.subtitle}')
                     .form-group
                         label Category:
                         select.form-control(name='category')
-                            option(value='1') CATEGORY
-                            option(value='1') CATEGORY
-                            option(value='1') CATEGORY
+                            each category, i in categories
+                                option(value='#{category._id') #{category.title}
                     .form-group
                         label Author:
-                        input.form-control(name='author', type='text')
+                        input.form-control(name='author', type='text', value='#{article.author}')
                     .form-group
                         label Body
-                        textarea.form-control(name='body', id='article_body')
+                        textarea.form-control(name='body', id='article_body', value='#{article.body}')
                             if body
                                 =body
                         br

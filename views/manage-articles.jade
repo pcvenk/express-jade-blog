@@ -14,14 +14,12 @@ block content
                 table(class='table table-striped')
                     tr
                         th Article Title
-                        th Category
                         th Date Published
                         th Author
                         th
                             each article, i in articles
                                 tr
                                     td #{article.title}
-                                    td #{article.category}
                                     td #{moment(article.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
                                     td #{article.author}
                                     td

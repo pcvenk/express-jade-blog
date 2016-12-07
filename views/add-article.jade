@@ -16,9 +16,8 @@ block content
                     .form-group
                         label Category:
                         select.form-control(name='category')
-                            option(value='1') CATEGORY
-                            option(value='1') CATEGORY
-                            option(value='1') CATEGORY
+                            each category, i in categories
+                                option(value='#{category._id') #{category.title}
                     .form-group
                         label Author:
                         input.form-control(name='author', type='text')
@@ -28,5 +27,10 @@ block content
                             if body
                                 =body
                         br
+                        if errors
+                            each error, i in errors
+                                div.alert.alert-info #{error.msg)
+                        br
+
                         input.btn.btn-primary.save-button(name='submit', type='submit', value='Save')
                         a(class='btn btn-default' href='/manage/articles') Back

@@ -18,10 +18,11 @@ block content
                         th Date Published
                         th Author
                         th
-                            tr
-                                td TITLE
-                                td CATEGORY
-                                td TIME
-                                td AUTHOR
-                                td
-                                    a(class='btn btn-xs btn-default' href='/manage/articles/edit/1') Edit
+                            each article, i in articles
+                                tr
+                                    td #{article.title}
+                                    td #{article.category}
+                                    td #{moment(article.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+                                    td #{article.author}
+                                    td
+                                        a(class='btn btn-xs btn-default' href='/manage/articles/edit/#{article._id}') Edit

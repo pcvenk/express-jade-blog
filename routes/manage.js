@@ -2,9 +2,20 @@ var express = require('express');
 var router = express.Router();
 
 Category = require('../models/category');
+Article = require('../models/article');
 
 router.get('/articles', function (req, res, next) {
-    res.render('manage-articles', {title: 'Manage Articles'});
+
+    Article.getArticles(function(err, docs){
+       if(err){
+           res.send(err);
+       }else{
+           res.render('manage-articles', {
+               title: 'Manage Articles',
+               articles: docs
+           });
+       }
+    });
 });
 
 router.get('/categories', function (req, res, next) {

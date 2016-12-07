@@ -17,7 +17,15 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/show/:id', function(req, res, next){
-   res.render('article');
+   Article.getArticleById([req.params.id], function(err, doc){
+      if(err){
+          res.send(err);
+      }else{
+          res.render('article', {
+              article: doc
+          });
+      }
+   });
 });
 
 router.get('/category/:category_id', function(req, res, next){

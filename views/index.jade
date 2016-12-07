@@ -16,7 +16,7 @@ block content
                     .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
                         each article, i in articles
                             .post-preview
-                                a(href='/articles/show/:id')
+                                a(href='/articles/show/#{article._id}')
                                     h2.post-title #{article.title}
                                     h3.post-subtitle #{article.subtitle}
                                 p.post-meta #{article.author}

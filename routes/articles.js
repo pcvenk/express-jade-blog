@@ -35,6 +35,7 @@ router.get('/show/:id/comment', function(req, res){
             res.send(err);
         }else{
             res.render('add-comment', {
+                title: 'Add Comment',
                 article: article
             });
         }

@@ -28,6 +28,19 @@ router.get('/show/:id', function(req, res, next){
    });
 });
 
+router.get('/show/:id/comment', function(req, res){
+
+    Article.getArticleById([req.params.id], function(err, article){
+        if(err){
+            res.send(err);
+        }else{
+            res.render('add-comment', {
+                article: article
+            });
+        }
+    });
+});
+
 router.post('/add', function(req, res){
     //enabling express validator. title refers to the input name
     req.checkBody('title', 'Title is required').notEmpty();

@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    br
+    br
+    br
+    br
+    .spacer
+        .container
+            .row
+                .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+                h4 Add a Comment
+                    p
+                        form.comment-form(method='post', action='/articles/comments/add/#{article._id}' id="comments")
+                            input(name='article_id', type='hidden',value='#{article._id}')
+                            .form-group
+                                label Subject
+                                input.form-control(type='text',name='comment_subject')
+                            .form-group
+                                label Name
+                                input.form-control(type='text',name='comment_author')
+                            .form-group
+                                label Email
+                                input.form-control(type='email',name='comment_email')
+                            .form-group
+                                label Body
+                                textarea.form-control(name='comment_body',id='body')
+                            input.btn.btn-default.pull-right.comment(name='submit',type='submit',value='Submit')
+                            a.btn.btn-default.pull-right.comment(href="/articles/show/#{article._id}") Back

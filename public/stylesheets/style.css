@@ -502,6 +502,12 @@ body {
 
 }
 
+.pull-right.comment {
+
+    margin-right: 0 !important;
+    margin-left: 25px !important;
+}
+
 .delete-btn {
 
     margin-right: 0 !important;

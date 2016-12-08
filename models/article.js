@@ -25,8 +25,8 @@ var articleSchema = new mongoose.Schema({
 var Article = module.exports = mongoose.model('Article', articleSchema);
 
 //getArticles
-module.exports.getArticles = function(callback, limit){
-    Article.find(callback).limit(limit);
+module.exports.getArticles = function(query, callback, limit){
+    Article.find(query, callback).limit(limit);
 };
 
 //addArticles

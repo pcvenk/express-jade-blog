@@ -123,8 +123,21 @@ router.delete('/delete/:id', function(req, res){
 
 
 router.get('/category/:category_id', function(req, res, next){
-   res.render('articles');
+
+    Article.getArticles({category:req.params.category_id}, function(err, articles){
+        if(err){
+            res.send(err);
+        }else{
+            Category.getCategoryById(req.params.category_id, function(err, category){
+                res.render('article-by-category',{
+                    title: 'category.title',
+                    articles: articles
+                });
+            });
+        }
+    });
 });
+
 
 module.exports = router;
 

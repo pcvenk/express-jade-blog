@@ -19,4 +19,24 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('.article-delete').click(function(e){
+        $target = $(e.target);
+        $.ajax({
+            type: 'DELETE',
+            url: '/articles/delete/' + $target.attr('data-article-id'),
+            data: {
+                _csrf: $target.attr('data-csrf')
+            },
+            success: function(response){
+                $target.parent().parent().remove();
+                alert('Article Removed');
+                window.location.href='/manage/articles'
+            },
+            error: function(error){
+                alert(error);
+                console.log(error);
+            }
+        });
+    });
 });

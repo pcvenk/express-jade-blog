@@ -30,3 +30,4 @@ block content
                         br
                         input.btn.btn-primary.save-button(name='submit', type='submit', value='Save')
                         a(class='btn btn-default' href='/manage/articles') Back
+                        a(class='btn btn-danger article-delete pull-right delete-btn', data-article-id=article._id.toString(), data-csrf=locals._csrf) Delete

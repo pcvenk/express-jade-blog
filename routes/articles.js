@@ -74,6 +74,7 @@ router.post('/edit/:id', function(req, res, next){
     req.checkBody('title','Title field is required').notEmpty();
     req.checkBody('author','Author field is required').notEmpty();
     req.checkBody('category','Category field is required').notEmpty();
+
     // Check Errors
     var errors = req.validationErrors();
 
@@ -106,6 +107,17 @@ router.post('/edit/:id', function(req, res, next){
             }
         });
     }
+});
+
+router.delete('/delete/:id', function(req, res){
+    var query = {_id: [req.params.id]};
+    Article.remove(query, function(err){
+        if(err){
+            res.send(err);
+        } else {
+            res.status(204).send();
+        }
+    });
 });
 
 

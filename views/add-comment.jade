@@ -6,19 +6,25 @@ block content
         .row
             .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
             h1= title
-            form.comment-form(method='post', action='/articles/comments/add/#{article._id}' id="comments")
-                input(name='article_id', type='hidden',value='#{article._id}')
+            form.comment-form(method='post', action='/articles/comments/add/#{article._id}' id='comments')
+                input(name='article_id', type='hidden', value='#{article._id}')
                 .form-group
                     label Subject
-                    input.form-control(type='text',name='comment_subject')
+                    input.form-control(type='text', name='subject')
                 .form-group
                     label Name
-                    input.form-control(type='text',name='comment_author')
+                    input.form-control(type='text', name='author')
                 .form-group
                     label Email
-                    input.form-control(type='email',name='comment_email')
+                    input.form-control(type='email', name='email')
                 .form-group
                     label Body
-                    textarea.form-control(name='comment_body',id='body')
-                input.btn.btn-default.pull-right.comment(name='submit',type='submit',value='Submit')
+                    textarea.form-control(name='body', id='body')
+                input.btn.btn-default.pull-right.comment(name='submit', type='submit', value='Submit')
                 a.btn.btn-default.pull-right.comment(href="/articles/show/#{article._id}") Back
+            br
+            br
+            br
+            if errors
+                each error, i in errors
+                    div.alert.alert-info #{error.msg)

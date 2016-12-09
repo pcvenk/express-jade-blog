@@ -28,7 +28,7 @@ router.get('/show/:id', function(req, res, next){
    });
 });
 
-router.get('/show/:id/comment', function(req, res){
+router.get('/comments/add/:id', function(req, res){
 
     Article.getArticleById([req.params.id], function(err, article){
         if(err){
@@ -40,6 +40,61 @@ router.get('/show/:id/comment', function(req, res){
             });
         }
     });
+});
+
+router.post('/comments/add/:id', function(req, res, next){
+    // Validation Rules
+    req.checkBody('subject','Subject field is required').notEmpty();
+    req.checkBody('author','Author field is required').notEmpty();
+    req.checkBody('body','Body field is required').notEmpty();
+    // Check Errors
+    var valErrors = req.validationErrors();
+
+    if(valErrors){
+        Article.getArticleById([req.params.id], function(err, article){
+            if(err){
+                console.log(err);
+                res.send(err);
+            } else {
+                res.render('add-comment', {
+                    errors: valErrors,
+                    article: article,
+                    subject: req.body.subject,
+                    author: req.body.author,
+                    body: req.body.body,
+                    email: req.body.email
+                });
+            }
+        });
+    } else {
+        var article = new Article();
+        var query = {_id:[req.params.id]};
+
+        var comment = {
+            subject: req.body.subject,
+            author: req.body.author,
+            body: req.body.body,
+            email: req.body.email
+        };
+
+        Article.addComment(query, comment, function(err, article){
+            if(err){
+                res.send('Error: '+err);
+            } else {
+                Article.getArticleById([req.params.id], function(err, article){
+                    if(err){
+                        console.log(err);
+                        res.send(err);
+                    } else {
+                        res.render('article',{
+                            article: article,
+                            successMsg: 'Comment Added'
+                        });
+                    }
+                });
+            }
+        });
+    }
 });
 
 router.post('/add', function(req, res){
@@ -90,25 +145,25 @@ router.post('/edit/:id', function(req, res, next){
     req.checkBody('category','Category field is required').notEmpty();
 
     // Check Errors
-    var errors = req.validationErrors();
+    var valerrors = req.validationErrors();
 
-    if(errors){
+    if(valerrors){
         res.render('edit_article',{
-            "errors": errors,
-            "title": req.body.title,
-            "subtitle": req.body.subtitle,
-            "body": req.body.body,
-            "author": req.body.author,
-            "category": req.body.category
+            errors: valerrors,
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            body: req.body.body,
+            author: req.body.author,
+            category: req.body.category
         });
     } else {
         var article = new Article();
         var query = {_id:[req.params.id]};
         var update = {
-            title:req.body.title,
-            subtitle:req.body.subtitle,
-            category:req.body.category,
-            author:req.body.author
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            category: req.body.category,
+            author: req.body.author
         };
 
         Article.updateArticle(query, update, {}, function(err, article){
@@ -150,61 +205,6 @@ router.get('/category/:category_id', function(req, res, next){
             });
         }
     });
-});
-
-router.post('/comments/add/:id', function(req, res, next){
-    // Validation Rules
-    req.checkBody('comment_subject','Subject field is required').notEmpty();
-    req.checkBody('comment_author','Author field is required').notEmpty();
-    req.checkBody('comment_body','Body field is required').notEmpty();
-    // Check Errors
-    var errors = req.validationErrors();
-
-    if(errors){
-        Article.getArticleById([req.params.id], function(err, article){
-            if(err){
-                console.log(err);
-                res.send(err);
-            } else {
-                res.render('article',{
-                    "errors": errors,
-                    "article": article,
-                    "comment_subject": req.body.comment_subject,
-                    "comment_author": req.body.comment_author,
-                    "comment_body": req.body.comment_body,
-                    "comment_email": req.body.comment_email
-                });
-            }
-        });
-    } else {
-        var article = new Article();
-        var query = {_id:[req.params.id]};
-
-        var comment = {
-            "comment_subject":req.body.comment_subject,
-            "comment_author":req.body.comment_author,
-            "comment_body":req.body.comment_body,
-            "comment_email":req.body.comment_email
-        };
-
-        Article.addComment(query, comment, function(err, article){
-            if(err){
-                res.send('Error: '+err);
-            } else {
-                Article.getArticleById([req.params.id], function(err, article){
-                    if(err){
-                        console.log(err);
-                        res.send(err);
-                    } else {
-                        res.render('article',{
-                            "article": article,
-                            "successMsg": 'Comment Added'
-                        });
-                    }
-                });
-            }
-        });
-    }
 });
 
 

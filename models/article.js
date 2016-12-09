@@ -43,3 +43,14 @@ module.exports.getArticleById = function(id, callback){
 module.exports.updateArticle = function(query, update, options, callback){
     Article.findOneAndUpdate(query, update, options, callback);
 };
+
+// Add Comment
+module.exports.addComment = function(query, comment, callback){
+    Article.update(query,
+        { $push: {
+            "comments": comment
+        }
+
+        },
+        callback);
+};
